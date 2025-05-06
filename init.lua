@@ -418,7 +418,12 @@ require('lazy').setup({
         --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
         --   },
         -- },
-        -- pickers = {}
+        pickers = {
+          buffers = {
+            sort_lastused = true,
+            ignore_current_buffer = true,
+          },
+        },
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
@@ -1042,3 +1047,9 @@ require('lazy').setup({
 -- vim: ts=2 sts=2 sw=2 et
 
 vim.api.nvim_set_keymap('n', '<leader>t', ':NvimTreeFindFileToggle<CR>', { noremap = true })
+
+vim.filetype.add {
+  extension = {
+    ejs = 'html',
+  },
+}
