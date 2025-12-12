@@ -393,6 +393,17 @@ require('lazy').setup({
           }
         end,
       },
+
+      {
+        'linux-cultist/venv-selector.nvim',
+        dependencies = { 'neovim/nvim-lspconfig', 'nvim-telescope/telescope.nvim' },
+        opts = {
+          search_workspace = true, -- look for .venv in project
+          search_venv_managers = true, -- find venv from poetry/pipenv/uv
+          parents = 2, -- how far up to look for venv
+        },
+        keys = { '<leader>v', '<cmd>VenvSelect<cr>' },
+      },
     },
     config = function()
       -- Telescope is a fuzzy finder that comes with a lot of different things that
@@ -1058,5 +1069,19 @@ vim.api.nvim_set_keymap('n', '<leader>t', ':NvimTreeFindFileToggle<CR>', { norem
 vim.filetype.add {
   extension = {
     ejs = 'html',
+  },
+}
+
+require('lspconfig').basedpyright.setup {
+  settings = {
+    basedpyright = {
+      analysis = {
+        autoSearchPaths = true,
+        useLibraryCodeForTypes = true,
+        diagnosticMode = 'workspace',
+        extraPaths = { '.' }, -- makes Django, your apps, etc. visible
+        typeCheckingMode = 'standard',
+      },
+    },
   },
 }
